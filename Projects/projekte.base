@@ -1,0 +1,38 @@
+filters:
+  and:
+    - type == "project"
+    - file.inFolder("Projects")
+formulas:
+  status_icon: if(status == "active", "🟢", if(status == "planning", "🔵", if(status == "on-hold", "🟡", "✅")))
+  tage_inaktiv: (now() - file.mtime).days.round(0)
+properties:
+  status:
+    displayName: Status
+  client:
+    displayName: Kunde
+  updated:
+    displayName: Aktualisiert
+  formula.tage_inaktiv:
+    displayName: Tage seit Änderung
+views:
+  - type: table
+    name: Aktiv
+    filters:
+      and:
+        - status == "active"
+    order:
+      - formula.status_icon
+      - file.name
+      - client
+      - updated
+      - formula.tage_inaktiv
+  - type: table
+    name: Alle
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - client
+      - updated
+      - formula.tage_inaktiv

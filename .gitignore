@@ -1,0 +1,12 @@
+# Obsidian workspace state (device-specific, never sync)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS noise
+.DS_Store
+Thumbs.db
