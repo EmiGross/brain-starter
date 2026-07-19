@@ -21,6 +21,7 @@ Go through the whole conversation and collect:
 
 `Daily/YYYY-MM-DD.md` (create or append, Format siehe `Daily/CLAUDE.md`):
 - `## Heute passiert` — one bullet per work block, wikilinks für Projekte/Personen.
+- **Searchable question:** when logging a fix or solved problem, write the original symptom/question the way someone would search for it later *before* the solution — not just the fix. Future greps search for the problem, not the answer (principle from the [Cerebras knowledge-base post](https://www.cerebras.ai/blog/how-we-built-our-knowledge-base)).
 - `## Entscheidungen` — one line per decision, → [[entscheidungs-log]].
 - `## Tasks` — see step 3.
 - If the note already has content from earlier today (other device / earlier session): **merge, never overwrite**.
