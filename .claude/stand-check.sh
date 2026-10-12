@@ -25,6 +25,7 @@ aeltester_tage=0
 aeltester_datum=""
 
 for hub in Projects/*/*.md; do
+    [ -e "$hub" ] || continue                 # noch kein Projekt angelegt
     name=$(basename "$hub" .md)
     # nur Ordnernotizen (Projects/foo/foo.md), keine Unterseiten
     [ "$(basename "$(dirname "$hub")")" = "$name" ] || continue
