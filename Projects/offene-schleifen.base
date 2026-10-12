@@ -1,0 +1,77 @@
+filters:
+  and:
+    - file.ext == "md"
+    - file.hasProperty("open_loop")
+formulas:
+  ampel: if(loop_due, if(loop_due < today(), "🔴", if(loop_due <= today() + "3d", "🟡", "🟢")), "⚪️")
+  tage_bis_faellig: if(loop_due, (loop_due - today()).days.round(0), "")
+  tage_seit_kontakt: if(last_contact, (today() - last_contact).days.round(0), "")
+properties:
+  file.name:
+    displayName: Notiz
+  note.open_loop:
+    displayName: Was ist offen
+  note.loop_owner:
+    displayName: Wer ist dran
+  note.loop_due:
+    displayName: Fällig
+  note.last_contact:
+    displayName: Letzter Kontakt
+  note.status:
+    displayName: Status
+  formula.ampel:
+    displayName: Ampel
+  formula.tage_bis_faellig:
+    displayName: Tage bis fällig
+  formula.tage_seit_kontakt:
+    displayName: Tage seit Kontakt
+views:
+  - type: table
+    name: Ich bin dran
+    filters:
+      and:
+        - loop_owner == "ich"
+    order:
+      - formula.ampel
+      - file.name
+      - open_loop
+      - loop_due
+      - formula.tage_bis_faellig
+      - last_contact
+      - formula.tage_seit_kontakt
+    sort:
+      - property: loop_due
+        direction: ASC
+    columnSize:
+      formula.tage_bis_faellig: 72
+  - type: table
+    name: Warte auf andere
+    filters:
+      and:
+        - loop_owner == "sie"
+    order:
+      - formula.ampel
+      - file.name
+      - open_loop
+      - loop_due
+      - formula.tage_bis_faellig
+      - last_contact
+      - formula.tage_seit_kontakt
+    sort:
+      - property: loop_due
+        direction: ASC
+  - type: table
+    name: Alle
+    groupBy:
+      property: loop_owner
+      direction: ASC
+    order:
+      - formula.ampel
+      - file.name
+      - status
+      - open_loop
+      - loop_due
+      - last_contact
+    sort:
+      - property: loop_due
+        direction: ASC

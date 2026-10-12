@@ -1,0 +1,18 @@
+{
+  "name": "fortschritt",
+  "version": "0.2.0",
+  "description": "Zeigt unter dem Eingabefeld einen Fortschrittsbalken für mehrschrittige Aufgaben: Titel, erledigte Schritte, der laufende Schritt und die Zeit.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "position": {
+      "type": "string",
+      "title": "Position",
+      "description": "Wo der Balken steht: unter oder über dem Eingabefeld",
+      "default": "unten",
+      "options": [
+        "unten",
+        "oben"
+      ]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 ---
 type: registry
-updated: 2026-07-13
+updated: 2026-10-12
 ---
 
 # Connections
@@ -12,5 +12,6 @@ Registry of tools and data sources this brain can (or should) reach. Status: `co
 | Claude Code (lokal) | Liest & schreibt den Vault | connected |
 | Obsidian | Visuelle Ansicht des Vaults | planned |
 | GitHub | Sync zwischen Geräten | planned |
+| Claude-Code-Mods | Eigene Anzeigen und Rückfragen im Terminal, Auswahl und Installation in [[claude-code-mods]] | planned |
 
 > Neue Tools (Kalender, Mail, Cloud-Speicher …) hier eintragen, sobald sie relevant werden. Das wöchentliche `/audit` prüft diese Tabelle auf Lücken. Das Onboarding füllt die Tabelle initial.

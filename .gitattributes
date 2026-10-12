@@ -1,0 +1,4 @@
+# Skripte immer mit LF auschecken. Mit CRLF bricht bash ab, und die
+# SessionStart-Hooks schlucken den Fehler, die Daily-Note käme dann still nicht an.
+*.sh text eol=lf
+Resources/scripts/doc2md text eol=lf

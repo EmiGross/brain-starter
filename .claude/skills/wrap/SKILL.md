@@ -15,6 +15,7 @@ Go through the whole conversation and collect:
 - **Done:** what was actually built, fixed, decided, configured, delivered (per project).
 - **Decisions:** real decisions with reasoning → these go to `Intelligence/decisions/entscheidungs-log.md` (newest on top, `## YYYY-MM-DD — Titel` / **Entscheidung** / **Warum** / **Betrifft**).
 - **Durable facts:** new client/life/tool/project facts → promote to the matching `Context/` or `Projects/{name}/{name}.md` file now (History-Eintrag bei ersetzten Aussagen in Context-Dateien). The daily note keeps only the log line.
+- **Contacts and loops:** every exchange with a client, company or person that came up → in that counterpart's note: a new top line in `## Verlauf`, `last_contact`, and `open_loop` / `loop_owner` / `loop_due` updated, or all three deleted when nothing is open (root `CLAUDE.md` rule 12, field meanings in `Projects/CLAUDE.md`). `Projects/offene-schleifen.base` reads these keys, so a loop that is not updated here shows a wrong state there.
 - **Open ends:** anything started but not finished, or promised for later.
 
 ### 2. Daily-Note schreiben
@@ -34,6 +35,7 @@ Goal: no task stays open that is actually done, and open tasks live in exactly o
 2. For each open task, check against this session (and obvious evidence in files/repos): done? → tick `[x]` **in its original note** with a short italic annotation `*(erledigt DD.MM. — …)*`.
 3. Genuinely still open? → make sure it appears in **today's** `## Tasks` (once), tick the old instance with `*(→ heute gerollt)*`. Superseded/parked? → tick with reason.
 4. When unsure whether something is done, ask the owner in the final summary instead of guessing.
+5. A ticked task that was a note's `open_loop` (a follow-up, a call, an answer owed) closes that loop too: replace it with the next one or delete the three loop keys.
 
 ### 4. Commit + Push
 

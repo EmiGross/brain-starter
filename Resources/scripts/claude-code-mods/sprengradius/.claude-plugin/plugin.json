@@ -1,0 +1,5 @@
+{
+  "name": "sprengradius",
+  "version": "0.1.0",
+  "description": "Hält riskante Befehle in PowerShell und Bash an (Löschen, git reset, Prozesse beenden), zeigt, was betroffen wäre, und fragt vor dem Ausführen."
+}

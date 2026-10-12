@@ -7,7 +7,7 @@ Das Kit bringt die komplette Struktur, alle Regeln und die Skills mit. **Deine I
 ## Voraussetzungen
 
 - **[Claude Code](https://claude.com/claude-code)** (Terminal, Desktop-App oder VS Code)
-- **Git** installiert
+- **Git** installiert (unter Windows bringt es Git Bash mit, das brauchen die Start-Hooks)
 - Optional: **[Obsidian](https://obsidian.md)** (um den Vault visuell zu durchstöbern) und ein **GitHub-Account** (um zwischen Geräten zu syncen)
 
 ## Los geht's (5 Minuten)
@@ -28,7 +28,7 @@ Das Kit bringt die komplette Struktur, alle Regeln und die Skills mit. **Deine I
    ```
    /onboarding
    ```
-   Claude führt dich durch ein Interview (wer du bist, was du machst, deine Kunden/Projekte, deine Tools) und füllt daraus den Vault. Dauert 15–30 Minuten, lohnt sich — je ehrlicher und ausführlicher, desto besser wird dein Brain.
+   Claude führt dich durch ein Interview (wer du bist, was du machst, deine Kunden/Projekte, deine Tools) und füllt daraus den Vault. Dauert 15–30 Minuten, lohnt sich — je ehrlicher und ausführlicher, desto besser wird dein Brain. Am Ende fragt Claude, welche der mitgelieferten Mods du haben willst.
 
 ## Der Arbeitsrhythmus danach
 
@@ -41,6 +41,35 @@ Das Kit bringt die komplette Struktur, alle Regeln und die Skills mit. **Deine I
 
 Ansonsten: einfach normal mit Claude arbeiten. Alles Wichtige landet automatisch am richtigen Ort — dafür sorgen die Regeln in `CLAUDE.md`.
 
+## Was von selbst läuft
+
+Bei jedem Start von Claude Code im Vault laufen zwei kleine Skripte (Start-Hooks, eingetragen in `.claude/settings.json`):
+
+- **Daily-Kurzfassung:** lädt die neueste Daily-Note gekürzt, damit Claude sofort weiß, wo ihr steht
+- **Stand-Check:** nennt höchstens ein Projekt, das auf „aktiv“ steht und seit drei Wochen still ist. Claude fragt dann beiläufig nach
+
+Dazu führt das Brain **offene Schleifen**: Bei Kunden, Firmen und Personen steht in der Notiz, was gerade offen ist und wer dran ist. `Projects/offene-schleifen.base` zeigt alle auf einen Blick.
+
+## Mods (optional)
+
+Mods sind kleine Plugins, die eigene Oberfläche in Claude Code zeichnen. Der Vault bringt fünf mit. Keiner ist vorinstalliert: Beim Onboarding fragt Claude, welche du willst, und du kannst jederzeit welche nachholen oder entfernen.
+
+| Mod | Was er macht |
+|---|---|
+| `brain-zeile` | Der nächste Termin aus deinen offenen Aufgaben, unter dem Eingabefeld |
+| `kontext-anzeige` | Wie voll der Kontext ist, mit rechtzeitigem Rat zu `/wrap` |
+| `fortschritt` | Fortschrittsbalken bei Aufgaben mit mehreren Schritten |
+| `sprengradius` | Rückfrage vor riskanten Befehlen (Löschen, `git reset --hard`, …) |
+| `merker` | Bietet an, deine Korrekturen als dauerhafte Regel zu speichern |
+
+Von Hand installieren, mit dem Pfad zu deinem Vault:
+
+```
+claude plugin install fortschritt --marketplace "PFAD/ZU/DEINEM/VAULT"
+```
+
+Alles Weitere steht in `Resources/claude-code-mods.md`. Die Mod-Schnittstelle von Claude Code ist noch Early Access und kann sich ändern.
+
 ## Struktur
 
 ```
@@ -51,9 +80,12 @@ Daily/             ← ein Log pro Arbeitstag (Kurzzeitgedächtnis)
 Projects/          ← ein Ordner pro aktivem Projekt
 Intelligence/      ← Meetings, Entscheidungs-Log, Archiv
 Resources/         ← wiederverwendbare Templates, Checklisten, Prompts
+  scripts/         ← Hilfsskripte und der Quellcode der Mods
 Skills/            ← Wissensbasis für Workflows
 Inbox/             ← Unsortiertes zum später Einordnen
 .claude/skills/    ← die ausführbaren Skills (/wrap, /audit, …)
+.claude/           ← dazu die Start-Hooks (settings.json, zwei Skripte)
+.claude-plugin/    ← Liste der Mods, aus der Claude Code installiert
 ```
 
 ---

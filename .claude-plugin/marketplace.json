@@ -1,0 +1,34 @@
+{
+  "name": "brain-starter",
+  "owner": { "name": "EmiGross" },
+  "metadata": {
+    "description": "Mods für Claude Code, die zum Second-Brain-Starter gehören. Jeder ist einzeln wählbar."
+  },
+  "plugins": [
+    {
+      "name": "brain-zeile",
+      "source": "./Resources/scripts/claude-code-mods/brain-zeile",
+      "description": "Zeigt unter dem Eingabefeld den nächsten Termin aus den offenen Aufgaben der neuesten Daily-Note."
+    },
+    {
+      "name": "kontext-anzeige",
+      "source": "./Resources/scripts/claude-code-mods/kontext-anzeige",
+      "description": "Zeigt unter dem Eingabefeld, womit der Kontext belegt ist, und rät rechtzeitig zu /wrap."
+    },
+    {
+      "name": "fortschritt",
+      "source": "./Resources/scripts/claude-code-mods/fortschritt",
+      "description": "Fortschrittsbalken unter dem Eingabefeld für Aufgaben mit mehreren Schritten."
+    },
+    {
+      "name": "sprengradius",
+      "source": "./Resources/scripts/claude-code-mods/sprengradius",
+      "description": "Hält riskante Befehle an, zeigt, was betroffen wäre, und fragt vor dem Ausführen."
+    },
+    {
+      "name": "merker",
+      "source": "./Resources/scripts/claude-code-mods/merker",
+      "description": "Erkennt Korrekturen in deinen Nachrichten und bietet an, sie als dauerhafte Regel zu speichern."
+    }
+  ]
+}

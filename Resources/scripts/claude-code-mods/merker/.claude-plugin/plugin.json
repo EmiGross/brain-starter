@@ -1,0 +1,6 @@
+{
+  "name": "merker",
+  "version": "0.1.0",
+  "description": "Erkennt Korrekturen in deinen Nachrichten und bietet an, sie als dauerhafte Regel zu speichern. Claude formuliert die Regel und legt sie im Memory ab.",
+  "types": "./types/index.d.ts"
+}
