@@ -30,6 +30,24 @@ Das Kit bringt die komplette Struktur, alle Regeln und die Skills mit. **Deine I
    ```
    Claude führt dich durch ein Interview (wer du bist, was du machst, deine Kunden/Projekte, deine Tools) und füllt daraus den Vault. Dauert 15–30 Minuten, lohnt sich — je ehrlicher und ausführlicher, desto besser wird dein Brain. Am Ende fragt Claude, welche der mitgelieferten Mods du haben willst.
 
+## Oder: Claude richtet es für dich ein
+
+Du willst die drei Schritte nicht von Hand machen? Starte Claude Code in dem Ordner, in dem dein Brain liegen soll, und füge diesen Text ein:
+
+```
+Richte mir ein Second Brain aus dem Starter-Kit https://github.com/EmiGross/brain-starter ein.
+
+1. Prüfe mit `git --version`, ob Git installiert ist. Fehlt es, sag mir, was ich installieren muss. Installiere nichts ungefragt.
+2. Frag mich, wie der Ordner heißen soll (Vorschlag: brain). Er entsteht im aktuellen Ordner.
+3. Hol das Kit mit `git clone https://github.com/EmiGross/brain-starter.git ORDNERNAME` und führe danach in dem neuen Ordner `git remote remove origin` aus, damit nichts an das Starter-Kit zurückgeht.
+4. Lies im neuen Ordner `CLAUDE.md` und `.claude/skills/onboarding/SKILL.md` und führe das Onboarding Schritt für Schritt mit mir durch. Alle Dateien entstehen im neuen Ordner.
+5. Sag mir am Ende, dass ich Claude Code ab jetzt in diesem Ordner starte, damit Regeln, Skills und Start-Hooks geladen werden.
+
+Regeln: Schreib nur auf, was ich wirklich sage. Lade nichts zu GitHub hoch, ohne mich zu fragen, und lege ein Repo nur privat an. Installiere nur die Mods, die ich auswähle.
+```
+
+Claude holt das Kit, führt das Interview und fragt am Schluss, ob dein Brain in ein eigenes privates GitHub-Repo soll. Die Skills, Start-Hooks und Mods sind für Claude Code gebaut. Andere KI-Agenten können den Text und die `SKILL.md` als Anleitung lesen, die Hooks und Mods laufen dort aber nicht.
+
 ## Der Arbeitsrhythmus danach
 
 | Wann | Befehl | Was passiert |
