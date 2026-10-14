@@ -24,7 +24,6 @@ const NACH_CLEAR_MS = 1500
 // Die Hinweiszeile ist eingerückt, der Kasten soll nicht umbrechen.
 const RAND_UNTEN = 4
 const BEFEHL = 'kontext'
-const MERKER = 'klein'
 
 const stand = atom({ plugin: 'kontext-anzeige', key: 'stand' } as const, null)
 const klein = atom({ plugin: 'kontext-anzeige', key: 'klein' } as const, false)
@@ -53,18 +52,15 @@ const messe = async ($: EngineInterface): Promise<void> => {
   hatGewarnt = istVoll
 }
 
-// Die Ansicht gilt über die Sitzung hinaus.
-const ladeAnsicht = async ($: EngineInterface): Promise<void> => {
-  const gemerkt = (await $.store.get(MERKER)) === true
-
-  await update($, klein, () => gemerkt)
+// Jede Sitzung beginnt in der Ansicht aus /config, umschalten gilt nur bis zum Ende.
+const ladeAnsicht = async ($: EngineInterface, start: unknown): Promise<void> => {
+  await update($, klein, () => start !== 'groß')
 }
 
 const schalteUm = async ($: EngineInterface): Promise<boolean> => {
   const neu = !(await read($, klein))
 
   await update($, klein, () => neu)
-  await $.store.set(MERKER, neu)
 
   return neu
 }
@@ -189,7 +185,7 @@ export const register: Register = (on, options) => {
       name: BEFEHL,
       description: 'Kontext-Anzeige klein oder groß schalten',
     })
-    await ladeAnsicht($)
+    await ladeAnsicht($, options.start)
     await messe($)
 
     return next(e)

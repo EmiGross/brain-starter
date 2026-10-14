@@ -1,7 +1,7 @@
 ---
 type: reference
 date: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-14
 ---
 
 Mods sind kleine TypeScript-Plugins, die sich in Claude Code einklinken und eigene Oberfläche ins Terminal zeichnen. Anders als Regeln in `CLAUDE.md` sind sie Code und greifen jedes Mal. Der Vault bringt fünf mit, keiner ist von Haus aus installiert: Welche du brauchst, entscheidest du beim Onboarding oder später.
@@ -11,7 +11,7 @@ Mods sind kleine TypeScript-Plugins, die sich in Claude Code einklinken und eige
 | Mod | Was er macht | Gut zu wissen |
 |---|---|---|
 | `brain-zeile` | Zeigt unter dem Eingabefeld den nächsten Termin aus den offenen Aufgaben der neuesten Daily-Note. Zählt ein Datum im fetten Titel einer Aufgabe, bei Aufgaben mit ⏰ auch das nächste Datum aus der Beschreibung | Braucht Daily-Notes mit `## Tasks`. Liest `Daily/` im Ordner, in dem Claude Code gestartet wurde |
-| `kontext-anzeige` | Kasten unter dem Eingabefeld: womit der Kontext belegt ist, als farbiger Balken mit Legende, dazu die Abo-Limits. Ab 70 % rät er zu `/wrap`, ab 85 % kommt einmal ein Hinweis | `/kontext` schaltet auf eine einzeilige Ansicht um |
+| `kontext-anzeige` | Kasten unter dem Eingabefeld: womit der Kontext belegt ist, als farbiger Balken mit Legende, dazu die Abo-Limits. Ab 70 % rät er zu `/wrap`, ab 85 % kommt einmal ein Hinweis | Startet in jeder Sitzung als einzeilige Ansicht, `/kontext` klappt den Kasten bis Sitzungsende auf. Einstellung „Ansicht beim Start“: `klein` (Standard) oder `groß` |
 | `fortschritt` | Dünner Balken unter dem Eingabefeld für Aufgaben mit mehreren Schritten: Titel, erledigte Schritte, der laufende Schritt, die Zeit | Claude meldet die Schritte selbst. `/fortschritt` blendet den Balken aus |
 | `sprengradius` | Hält riskante Befehle in PowerShell und Bash an: Löschen mit Unterordnern oder Platzhaltern, `git reset --hard`, `git clean`, `git push --force`, Prozesse beenden, Laufwerksbefehle. Zeigt, was betroffen wäre, und fragt vor dem Ausführen | Gebaut und erprobt unter Windows |
 | `merker` | Erkennt an der Wortwahl Korrekturen in deinen Nachrichten („nein“, „ab jetzt“, „stattdessen“, „merk dir“) und fragt, ob daraus eine dauerhafte Regel werden soll. Claude formuliert sie und legt sie ab | `/merken <Text>` speichert eine eigene Regel, `/merken aus` schaltet die Erkennung ab |

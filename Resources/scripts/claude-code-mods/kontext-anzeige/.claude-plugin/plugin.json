@@ -1,9 +1,19 @@
 {
   "name": "kontext-anzeige",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Zeigt unter dem Eingabefeld, womit der Kontext belegt ist: Balken, Legende, Abo-Limits und rechtzeitig der Rat zu /wrap.",
   "types": "./types/index.d.ts",
   "userConfig": {
+    "start": {
+      "type": "string",
+      "title": "Ansicht beim Start",
+      "description": "Wie die Anzeige in jeder neuen Sitzung beginnt. /kontext oder der Knopf schaltet für die laufende Sitzung um",
+      "default": "klein",
+      "options": [
+        "klein",
+        "groß"
+      ]
+    },
     "position": {
       "type": "string",
       "title": "Position",

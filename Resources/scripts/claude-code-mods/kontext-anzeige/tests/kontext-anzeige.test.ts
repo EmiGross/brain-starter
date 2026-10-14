@@ -100,9 +100,8 @@ test('rät ab 70 % zu /wrap und ab 85 % dringend', () => {
   expect([69, 70, 85].map(rat)).toEqual(['', 'bald /wrap', 'jetzt /wrap'])
 })
 
-test('zeichnet den Kasten und warnt einmal, wenn es voll wird', async ($, on) => {
+test('startet klein, klappt mit /kontext auf und warnt einmal', async ($, on) => {
   const hinweise: string[] = []
-  const merker = new Map<string, unknown>()
   let prozent = 6
 
   on('session.usage', () => ({ value: messung(prozent) }))
@@ -110,12 +109,6 @@ test('zeichnet den Kasten und warnt einmal, wenn es voll wird', async ($, on) =>
   on('session.measure', (_$, e) => ({ changed: e.changed }))
   on('ui.status', () => ({ value: undefined }))
   on('command.register', (_$, e) => ({ value: { command: e.name } }))
-  on('store.get', (_$, e) => ({ value: merker.get(e.key) }))
-  on('store.set', (_$, e) => {
-    merker.set(e.key, e.value)
-
-    return { value: undefined }
-  })
   on('ui.toast', (_$, e) => {
     hinweise.push(e.text)
 
@@ -127,6 +120,30 @@ test('zeichnet den Kasten und warnt einmal, wenn es voll wird', async ($, on) =>
     cwd: 'C:/Coding',
     surface: 'terminal',
     isInteractive: true,
+  })
+
+  // Ohne Einstellung beginnt jede Sitzung klein.
+  const kleinUi = await $.ui.mount({
+    plugin: 'kontext-anzeige',
+    surface: 'terminal',
+    component: 'PromptHint',
+    props: { isDraft: false, isWorking: false, hint: '? for shortcuts' },
+  })
+
+  expect(await kleinUi.find({ type: 'Text', text: ' 6 % ' })).toBeDefined()
+  expect(await kleinUi.find({ type: 'Text', text: 'MCP-Tools' })).toBeUndefined()
+  await kleinUi.unmount()
+
+  // /kontext klappt den Kasten für diese Sitzung auf.
+  const antwort = await $.command.run({
+    command: 'kontext',
+    args: '',
+    origin: { kind: 'composer' },
+    presentation: { isFullscreen: false, columns: 110 },
+  })
+
+  expect(antwort).toEqual({
+    text: 'Kontext-Anzeige ist jetzt groß. /kontext schaltet zurück.',
   })
 
   for (const surface of ['terminal', 'desktop'] as const) {
@@ -147,28 +164,6 @@ test('zeichnet den Kasten und warnt einmal, wenn es voll wird', async ($, on) =>
     await ui.unmount()
   }
 
-  // /kontext schaltet auf die kleine Ansicht und merkt sie sich.
-  const antwort = await $.command.run({
-    command: 'kontext',
-    args: '',
-    origin: { kind: 'composer' },
-    presentation: { isFullscreen: false, columns: 110 },
-  })
-  const kleinUi = await $.ui.mount({
-    plugin: 'kontext-anzeige',
-    surface: 'terminal',
-    component: 'PromptHint',
-    props: { isDraft: false, isWorking: false, hint: '? for shortcuts' },
-  })
-
-  expect(antwort).toEqual({
-    text: 'Kontext-Anzeige ist jetzt klein. /kontext schaltet zurück.',
-  })
-  expect(merker.get('klein')).toBe(true)
-  expect(await kleinUi.find({ type: 'Text', text: ' 6 % ' })).toBeDefined()
-  expect(await kleinUi.find({ type: 'Text', text: 'MCP-Tools' })).toBeUndefined()
-  await kleinUi.unmount()
-
   const gemessen = {
     context: { window: 1_000_000 },
     rateLimits: [],
@@ -186,14 +181,13 @@ test('zeichnet den Kasten und warnt einmal, wenn es voll wird', async ($, on) =>
 })
 
 test(
-  'steht mit der Einstellung "oben" wieder über dem Eingabefeld',
-  { options: { position: 'oben' } },
+  'steht mit der Einstellung "oben" wieder über dem Eingabefeld, auf Wunsch groß',
+  { options: { position: 'oben', start: 'groß' } },
   async ($, on) => {
     on('session.usage', () => ({ value: messung(6) }))
     on('session.start', (_$, e) => ({ cwd: e.cwd }))
     on('ui.status', () => ({ value: undefined }))
     on('command.register', (_$, e) => ({ value: { command: e.name } }))
-    on('store.get', () => ({ value: undefined }))
     on('ui.render', ($e, e) => h($e.ui.resolve(e).Box, {}) as RenderElement)
 
     await $.session.start({
